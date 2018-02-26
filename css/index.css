@@ -1,0 +1,73 @@
+.align-mid {
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+.pwd-maxWidth {
+    width: 300px;
+}
+
+.show-glyphicon {
+    font-family: 'Glyphicons Halflings';
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#password-table>tbody>tr>td:nth-child(2) {
+    font-weight: bold
+}
+
+.error-field {
+    margin-top: 5px;
+}
+
+.col-sm-offset-3.error-field{
+    padding-left: 15px;
+}
+
+.error-field > span:after {
+    content: '\00a0';
+}
+
+div.col-sm-9.input-group {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.center-span {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    padding-bottom: 1px;
+    opacity: .3;
+}
+
+.float-btn {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+
+.float-btn:hover > span {
+    opacity: 1
+}
+
+ul.side-bar {
+    z-index: 2;
+    position: fixed;
+    top: 150px;
+    right: 15px;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+ul.side-bar li {
+    margin-bottom: 2px;
+}
+
+body{
+    min-width:1000px;
+}
