@@ -34,27 +34,6 @@ function createWindow() {
 
 let menuBar = [
 	{
-		label: 'File',
-		submenu: [
-			{
-				label: 'Open File',
-				accelerator: 'Control+O',
-				click: function () {
-					properties = ['createDirectory', 'openFile'],
-						parentWindow = (process.platform == 'darwin') ? null : BrowserWindow.getFocusedWindow();
-
-					dialog.showOpenDialog(parentWindow, properties, function (f) {
-						if (f != null) // if user click 'cancel' then f is null
-							win.webContents.send('file-to-open', f)
-					});
-				}
-			},
-			{
-				role: 'quit'
-			},
-		]
-	},
-	{
 		label: 'View',
 		submenu: [
 			{ role: 'reload' },
@@ -75,6 +54,13 @@ let menuBar = [
 				enabled: false,
 				click: () => {
 					win.webContents.send('Add-password')
+				}
+			},
+			{
+				label: 'Add several password',
+				enabled: false,
+				click: () => {
+					win.webContents.send('Add-multi-password')
 				}
 			}
 		]
@@ -142,7 +128,8 @@ app.on('activate', () => {
 })
 
 ipcMain.on('enableEdit', () => {
-	menuBar[2].submenu[0].enabled = true
+	menuBar[1].submenu[0].enabled = true
+	menuBar[1].submenu[1].enabled = true
 	menu = Menu.buildFromTemplate(menuBar);
 	Menu.setApplicationMenu(menu);
 })

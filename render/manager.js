@@ -6,6 +6,10 @@ const algorithm = 'aes-192-ctr'
 
 ipcRenderer.on('Add-password', addPasswordHandler)
 
+ipcRenderer.on('Add-multi-password', () => {
+    $('#multi-password-modal').modal('toggle')
+})
+
 let settings = {}, passwords = [], pwdTable = $('#password-table')
 
 document.addEventListener('settingReady', (e) => {
@@ -132,4 +136,36 @@ exports.removePasswordHandler = () => {
             }
         })
     }
+}
+
+exports.addMultiPasswordHandler = () => {
+    document.getElementById('m_check-unlockCodeError').innerHTML = ' '
+    data = document.getElementById('multiPwdTextarea').value.trim()
+    if (data.length == 0){
+        $('#multi-password-modal').modal('toggle')
+        return
+    }
+    unlock_code = document.getElementById('m_unlockCode').value
+    if (settings.seed !== decrypt(settings.unlockCodeChecker, unlock_code)) {
+        document.getElementById('m_check-unlockCodeError').innerHTML = 'Invalid unlock code!'
+        return
+    }
+    splited = data.split('\n')
+    origin_data = pwdTable.bootstrapTable('getData')
+    data_to_add = []
+    count = origin_data.length + 1
+    splited.forEach((value, index) => {
+        values = value.split(';')
+        if (values.length !== 4)
+            return
+        data_to_add.push({
+            index: count,
+            webSite: values[0],
+            username: values[1],
+            password: encrypt(values[2], unlock_code),
+            remark: values[3]
+        })
+        count++
+    })
+    pwdTable.bootstrapTable('append',data_to_add)
 }

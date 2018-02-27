@@ -68,6 +68,6 @@ ul.side-bar li {
     margin-bottom: 2px;
 }
 
-body{
-    min-width:1000px;
+textarea{
+    resize: none;
 }
