@@ -156,16 +156,20 @@ exports.addMultiPasswordHandler = () => {
     count = origin_data.length + 1
     splited.forEach((value, index) => {
         values = value.split(';')
-        if (values.length !== 4)
+        remark_value = "";
+        if (values.length < 3)
             return
+        if (values.length === 4)
+            remark_value = values[3]
         data_to_add.push({
             index: count,
             webSite: values[0],
             username: values[1],
             password: encrypt(values[2], unlock_code),
-            remark: values[3]
+            remark: remark_value
         })
         count++
     })
     pwdTable.bootstrapTable('append',data_to_add)
+    $('#multi-password-modal').modal('toggle')
 }
