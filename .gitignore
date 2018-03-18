@@ -8,3 +8,4 @@ pwd-data.json
 settings.json
 /node_modules
 /PasswordLock-win32-x64
+*.lnk
